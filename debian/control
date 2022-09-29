@@ -1,0 +1,106 @@
+Source: gnupg1
+Section: utils
+Priority: optional
+Maintainer: Debian GnuPG-Maintainers <pkg-gnupg-maint@lists.alioth.debian.org>
+Uploaders:
+ Sune Vuorela <debian@pusling.com>,
+ Eric Dorland <eric@debian.org>,
+ Daniel Kahn Gillmor <dkg@fifthhorseman.net>,
+Standards-Version: 4.1.4
+Build-Depends:
+ automake,
+ debhelper (>= 11~),
+ dh-exec,
+ dpkg-dev (>= 1.18.8~),
+ file,
+ gettext (>= 0.19.3),
+ libbz2-dev,
+ libcurl4-gnutls-dev,
+ libldap2-dev,
+ libreadline-dev,
+ libz-dev,
+ texinfo,
+Homepage: https://www.gnupg.org
+Vcs-Browser: https://salsa.debian.org/debian/gnupg1
+Vcs-Git: https://salsa.debian.org/debian/gnupg1.git
+Rules-Requires-Root: no
+
+Package: gnupg1
+Architecture: any
+Multi-Arch: foreign
+Depends:
+ gpgv | gpgv1,
+ ${misc:Depends},
+ ${shlibs:Depends},
+Recommends:
+ gnupg1-l10n (= ${source:Version}),
+ ${shlibs:Recommends},
+Breaks:
+ gnupg (<< 1.4.20-6+exp1),
+ gnupg1-curl (<< 1.4.22-2),
+Replaces:
+ gnupg (<< 1.4.20-6+exp1),
+ gnupg1-curl (<< 1.4.22-2),
+Provides:
+ gnupg1-curl,
+Suggests:
+ libpcsclite1,
+ parcimonie,
+ xloadimage | imagemagick | eog,
+Description: GNU privacy guard - a PGP implementation (deprecated "classic" version)
+ GnuPG is GNU's tool for secure communication and data storage.
+ It can be used to encrypt data and to create digital signatures.
+ It includes an advanced key management facility and is compliant
+ with the proposed OpenPGP Internet standard as described in RFC 4880.
+ .
+ The gnupg1 package provides GnuPG 1.4, the "classic" standalone,
+ non-modularized version. It is provided mainly for people with the
+ need to use archaic cryptographic objects like PGPv3 keys to access
+ archived messages.  It does not support more recent cryptographic
+ primitives like ECDSA or EdDSA.  Please use the gnupg package instead
+ unless you know for sure that you need gnupg1.
+
+Package: gpgv1
+Architecture: any
+Multi-Arch: foreign
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Suggests:
+ gnupg,
+Description: GNU privacy guard - signature verification tool (deprecated "classic" version)
+ GnuPG is GNU's tool for secure communication and data storage.
+ .
+ gpgv is a stripped-down version of gnupg which is only able to check
+ signatures.  It is smaller than the full-blown gnupg and uses a
+ different (and simpler) way to check that the public keys used to
+ make the signature are trustworthy.
+ .
+ gpgv1 is the "classic" version of gpgv. It does not support as many
+ cryptographic primitives as the modern version, so there are
+ signatures it cannot verify.  Please use the "gpgv" package instead
+ where possible.
+
+Package: gnupg1-l10n
+Architecture: all
+Section: localization
+Depends:
+ ${misc:Depends},
+Enhances:
+ gnupg1 (= ${binary:Version}),
+Breaks:
+ gnupg1 (<< 1.4.20-6+exp3~),
+Replaces:
+ gnupg1 (<< 1.4.20-6+exp3~),
+Description: GNU privacy guard "classic" - localization files (deprecated)
+ GnuPG is GNU's tool for secure communication and data storage.
+ It can be used to encrypt data and to create digital signatures.
+ It includes an advanced key management facility and is compliant
+ with the proposed OpenPGP Internet standard as described in RFC 4880.
+ .
+ GnuPG 1.4 is the "classic" standalone, non-modularized
+ version. Please use the gnupg package instead unless you know for
+ sure that you need gnupg1.
+ .
+ This package contains the translation files for the use of GnuPG
+ "classic" in non-English locales.
